@@ -120,3 +120,13 @@ export FLASK_APP=app.py
 
 
 On the port 5000 it will show Hello world.
+
+
+
+
+## Forms and User Input.
+
+```
+pip install flask-wtf
+
+```
