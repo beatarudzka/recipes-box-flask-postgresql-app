@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.min.css') }}">
+  <title>Recipe's box</title>
+</head>
+
+<body>
+  {% block content %} {% endblock %}
+
+  <script src="{{ url_for('static', filename='js/jquery/jquery-3.4.0.min.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/popper/popper-1.15.0.min.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/bootstrap/bootstrap.min.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/app.min.js') }}"></script>
+</body>
+
+</html>

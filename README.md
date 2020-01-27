@@ -2,9 +2,9 @@
 
 Boilerplate how to get started using the Flask framework (to-do)
 - [x] create new virtual env and install the necessary packages and get a basic Hello World Application running in our browser. 
-- [ ] add templates
-- [ ] prepare HTML for application
-- [ ] adding styling
+- [x] add templates
+- [ ] adding styling(preprocessors saas)
+
 
 
 ## 1. Creating virtual environment for new project.
@@ -181,3 +181,32 @@ Flask will look for templates in the templates folder. So if your application is
   <h1>Hello, World!</h1>
 {% endif %}
 ```
+
+## 3. Set up Flask with webassets.
+
+So first, let’s install those. 
+Python scss to css compiler:
+```
+$ pip install libsass
+```
+Python CSS minifier:
+
+```
+$ pip install rcssmin
+
+```
+
+Python JavaScript minifier:
+```
+$ pip install rjsmin
+
+```
+
+go ahead and make these folders in your project root:
+
+```
+static/
+templates/
+```
+
+All scss imports are declared in style.scss
