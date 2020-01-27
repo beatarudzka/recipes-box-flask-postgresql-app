@@ -1,0 +1,20 @@
+.menu-responsive {
+  background-color: #00ff6c;
+  padding: 2rem 0; }
+  .menu-responsive ul {
+    margin: 0;
+    padding: 0;
+    list-style: none; }
+    .menu-responsive ul li {
+      width: 100%;
+      padding: 1.5rem 0;
+      text-align: center; }
+      .menu-responsive ul li a {
+        font-size: 1.125rem;
+        color: #232323;
+        -webkit-transition: all 0.3s;
+        -o-transition: all 0.3s;
+        transition: all 0.3s; }
+        .menu-responsive ul li a:hover, .menu-responsive ul li a:active {
+          color: #fff;
+          text-decoration: none; }

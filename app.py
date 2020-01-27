@@ -21,7 +21,7 @@ recipes = [
 @app.route("/")
 @app.route("/home")
 def home():
-    return render_template('home.html', recipes=recipes)
+    return render_template('templates/home.html', recipes=recipes)
 
 
 @app.route('/add')

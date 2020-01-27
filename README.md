@@ -182,7 +182,7 @@ Flask will look for templates in the templates folder. So if your application is
 {% endif %}
 ```
 
-## 3. Set up Flask with webassets.
+## 3. Set up Flask with sass.
 
 So first, let’s install those. 
 Python scss to css compiler:
