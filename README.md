@@ -2,7 +2,7 @@
 
 Boilerplate how to get started using the Flask framework. 
 - [x] create new virtual env and install the necessary packages and get a basic Hello World Application running in our browser. 
-- [ ] prepare HTML for application 
+- [ ] create register and login form using wtforms
 - [ ] adding styling
 
 
