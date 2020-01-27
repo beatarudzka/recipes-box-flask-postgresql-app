@@ -1,4 +1,4 @@
-# Boilerplate for Python Flask App from Scratch
+# Step by step for Python Flask App from Scratch
 
 Boilerplate how to get started using the Flask framework. 
 - [x] create new virtual env and install the necessary packages and get a basic Hello World Application running in our browser. 
@@ -124,9 +124,20 @@ On the port 5000 it will show Hello world.
 
 
 
-## Forms and User Input.
+## 3.Forms and User Input.
 
 ```
 pip install flask-wtf
 
 ```
+
+Create files: register.html and login.html.
+Build new forms according to documentation:
+
+- wtforms:
+- flash:
+- url_for:
+- redirect:
+
+
+
