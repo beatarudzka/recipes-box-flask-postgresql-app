@@ -1,8 +1,9 @@
-# Boilerplate for Python Flask App from Scratch
+# Boilerplate for Python Flask App from Scratch in Ubuntu 18.04
 
-Boilerplate how to get started using the Flask framework. 
+Boilerplate how to get started using the Flask framework (to-do)
 - [x] create new virtual env and install the necessary packages and get a basic Hello World Application running in our browser. 
-- [ ] prepare HTML for application 
+- [ ] add templates
+- [ ] prepare HTML for application
 - [ ] adding styling
 
 
@@ -120,3 +121,63 @@ export FLASK_APP=app.py
 
 
 On the port 5000 it will show Hello world.
+
+Run your application in debug mode to make the server to show changes without restarting. To close, hit ctr + c and set up another env:
+
+```
+export FLASK_DEBUG=1
+
+```
+After that, run again flask app
+
+```
+flask run
+
+```
+
+![picture](images/flask_run.png)
+
+
+Changes should be showed automatically.
+
+Another way to do this, is putting a conditional in app.py:
+
+```
+if __name__ == '__main__':
+  app.run(debug=True)
+
+```
+##### 2.2. Add routes:
+
+```
+@app.route('/')
+@app.route('/home')
+def home():
+    return "<h1>Home Page</h1>"
+
+```
+##### 2.2. Render template from templates folder:
+
+To render a template you can use the render_template() method. All you have to do is provide the name of the template and the variables you want to pass to the template engine as keyword arguments. Here’s a simple example of how to render a template:
+
+```
+from flask import render_template
+
+@app.route('/hello/')
+@app.route('/hello/<name>')
+def hello(name=None):
+    return render_template('hello.html', name=name)
+
+```
+
+Flask will look for templates in the templates folder. So if your application is a module, this folder is next to that module, if it’s a package it’s actually inside your package:
+
+```
+<!doctype html>
+<title>Hello from Flask</title>
+{% if name %}
+  <h1>Hello {{ name }}!</h1>
+{% else %}
+  <h1>Hello, World!</h1>
+{% endif %}
+```
