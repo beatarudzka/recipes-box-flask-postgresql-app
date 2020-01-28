@@ -2,9 +2,14 @@
 
 Boilerplate how to get started using the Flask framework. 
 - [x] create new virtual env and install the necessary packages and get a basic Hello World Application running in our browser. 
-- [ ] create register and login form using wtforms
-- [ ] adding styling
-
+- [x] create register and login form using wtforms
+- [x] adding styling(used sass pre-processor - libsass)
+- [ ] database with Flask-SQLAlchemy
+- [ ] user authentication
+- [ ] creating user account with uploading the picture
+- [ ] adding pagination
+- [ ] creating custom error pages
+- [ ] deployment
 
 ## 1. Creating virtual environment for new project.
 
@@ -65,7 +70,7 @@ To enlist all packages:
 pip list
 ```
 
-You can also use your global site packahes within virtual Python environment.
+You can also use your global site packages within virtual Python environment.
 
 Freezing is a process where pip reads the versions of all installed packages in a local virtual environment and then produces a text file with the package version for each python package specified. By convention, it's named requirements. txt .
 
@@ -116,7 +121,7 @@ In line command of your virtual Python environment go to your project's folder a
 export FLASK_APP=app.py
 
 ```
-![picture](images/set_folder.png)
+
 
 
 On the port 5000 it will show Hello world.
@@ -132,12 +137,74 @@ pip install flask-wtf
 ```
 
 Create files: register.html and login.html.
-Build new forms according to documentation:
+Build new forms according to documentation using packages below:
 
-- wtforms:
-- flash:
-- url_for:
-- redirect:
+- wtforms,
+- flash,
+- url_for,
+- redirect
 
 
+## 3.Styling with pre-processors SASS.
 
+In the virtual env install new packages:
+
+```
+pip install rcssmin rjsmin sass
+```
+Using these 3 packages:
+    - Compiles scss to css
+    - Minifies css
+    - Minifies JavaScript
+
+In new script runner.py:
+
+```
+
+sass_map = {"app/static/scss/style.scss": "app/static/css/style.css"}
+
+
+css_map = {"app/static/css/style.css": "app/static/css/style.min.css"}
+
+
+js_map = {"app/static/js/app.js": "app/static/js/app.min.js"}
+
+
+def compile_sass_to_css(sass_map):
+
+    print("Compiling scss to css:")
+
+    for source, dest in sass_map.items():
+        with open(dest, "w") as outfile:
+            outfile.write(sass.compile(filename=source))
+        print(f"{source} compiled to {dest}")
+
+
+def minify_css(css_map):
+
+    print("Minifying css files:")
+
+    for source, dest in css_map.items():
+        with open(source, "r") as infile:
+            with open(dest, "w") as outfile:
+                outfile.write(rcssmin.cssmin(infile.read()))
+        print(f"{source} minified to {dest}")
+
+
+def minify_javascript(js_map):
+
+    print("Minifying JavaScript files:")
+
+    for source, dest in js_map.items():
+        with open(source, "r") as infile:
+            with open(dest, "w") as outfile:
+                outfile.write(rjsmin.jsmin(infile.read()))
+        print(f"{source} minified to {dest}")
+
+```
+
+Add to app.py:
+
+```
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.min.css') }}">
+```
