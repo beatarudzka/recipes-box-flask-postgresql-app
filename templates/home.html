@@ -3,12 +3,12 @@
 {% for recipe in recipes %}
 <article class="media content-section">
   <div class="media-body">
-    <div class="article-metadata">
+    <div class="recipe-metadata">
       <a class="mr-2" href="#">{{ recipe.author }}</a>
       <small class="text-muted">{{ recipe.date_posted }}</small>
     </div>
-    <h2><a class="article-title" href="#">{{ recipe.title }}</a></h2>
-    <p class="article-content">{{ recipe.content }}</p>
+    <h2><a class="recipe-title" href="#">{{ recipe.title }}</a></h2>
+    <p class="recipe-content">{{ recipe.content }}</p>
   </div>
 </article>
 {% endfor %}
