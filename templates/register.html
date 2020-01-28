@@ -8,6 +8,9 @@
       <legend class="border-bottom mb-4">Join to Recipe Boxes!</legend>
       <div class="form-group">
         {{form.username.label(class="form-control-label")}}
+
+        {% if %}
+
         {{form.username(class="form-control form-control-lg")}}
       </div>
       <div class="form-group">

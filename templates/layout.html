@@ -11,71 +11,86 @@
     integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
   <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
     crossorigin="anonymous"></script>
-  <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/style.min.css')}}">
+  <link href="https://fonts.googleapis.com/css?family=Quicksand:500" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.min.css') }}">
   <title>Recipe's box</title>
 </head>
 
 <body>
-  <div class="wrapper">
-    <header class="header">
-      <nav>
-        <div class="menu_icon">
-          <i class="fa fa-bars fa-2x"></i>
-        </div>
-        <div class="logo">
-          LOGO
-        </div>
-        <div class="menu">
-          <ul class="menu_list">
-            <li class="menu_list--item"><a class="menu_list--link" href="#">Home</a></li>
-            <li class="menu_list--item"><a class="menu_list--link" href="/add">Add recipes</a></li>
-            <li class="menu_list--item"><a class="menu_list--link" href="/register">Register</a></li>
-            <li class="menu_list--item"><a class="menu_list--link" href="/login">Log in</a></li>
-          </ul>
-        </div>
-      </nav>
-    </header>
+
+  <div class="menu-responsive">
+    <nav>
+      <ul>
+        <li><a class="scroll" href="#about">About</a></li>
+        <li><a class="scroll" href="#skills">Skills</a></li>
+        <li><a class="scroll" href="#portfolio">Portfolio</a></li>
+        <li><a class="scroll" href="#contact">Contact</a></li>
+      </ul>
+    </nav>
   </div>
-
-  <main role="main" class="container">
-    <div class="row">
-      <div class="col-md-8">
-        {% with messages = get_flashed_messages(with_categories=true) %}
-        {% if messages %}
-        {% for category, message in messages%}
-        <div class="alert alert-{{ category }}">
-          {{message}}
-        </div>
-        {% endfor %}
-        {% endif %}
-        {% endwith%}
-        {% block content %}{% endblock %}
-      </div>
-      <div class="col-md-4">
-        <div class="content-section">
-          <h3>Our Sidebar</h3>
-          <p class='text-muted'>You can put any information here you'd like.
-            <ul class="list-group">
-              <li class="list-group-item list-group-item-light">Latest Posts</li>
-              <li class="list-group-item list-group-item-light">Announcements</li>
-              <li class="list-group-item list-group-item-light">Calendars</li>
-              <li class="list-group-item list-group-item-light">etc</li>
+  <header>
+    <div class="container">
+      <div class="row">
+        <div class="header__top">
+          <nav class="col-md-6 header__top-nav hidden-md-down">
+            <ul>
+              <li><a class="scroll" href="/">Home</a></li>
+              <li><a class="scroll" href="/add">Add recipe</a></li>
+              <li><a class="scroll" href="/login">Log in</a></li>
+              <li><a class="scroll" href="/register">Register</a></li>
             </ul>
-          </p>
+          </nav>
+          <nav class="col-md-6 header__top--responsive hidden-lg-up">
+            <ul>
+              <li><a class="menu-bars" href="#"><i class="fa fa-bars" aria-hidden="true"></i></a></li>
+            </ul>
+          </nav>
         </div>
       </div>
-    </div>
-  </main>
 
-  <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
-    integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
-    crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
-    integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
-    crossorigin="anonymous"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
-    integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
-    crossorigin="anonymous"></script>
+      <main role="main" class="container">
+        <div class="row">
+          <div class="col-md-8">
+            {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+            {% for category, message in messages%}
+            <div class="alert alert-{{ category }}">
+              {{message}}
+            </div>
+            {% endfor %}
+            {% endif %}
+            {% endwith%}
+            {% block content %}{% endblock %}
+          </div>
+          <div class="col-md-4">
+            <div class="content-section">
+              <h3>Our Sidebar</h3>
+              <p class='text-muted'>You can put any information here you'd like.
+                <ul class="list-group">
+                  <li class="list-group-item list-group-item-light">Latest Posts</li>
+                  <li class="list-group-item list-group-item-light">Announcements</li>
+                  <li class="list-group-item list-group-item-light">Calendars</li>
+                  <li class="list-group-item list-group-item-light">etc</li>
+                </ul>
+              </p>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+
+
+
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+      integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+      crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+      integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+      crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+      integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+      crossorigin="anonymous"></script>
+    <script src="../static/js/app.min.js"></script>
 </body>
 
 </html>
