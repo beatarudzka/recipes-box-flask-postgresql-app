@@ -3,13 +3,13 @@ import rjsmin
 import sass
 
 # Map scss source files to css destination files
-sass_map = {"app/static/scss/style.scss": "app/static/css/style.css"}
+sass_map = {"static/scss/style.scss": "static/css/style.css"}
 
 # Map un-minified css source files to minified css destination files
-css_map = {"app/static/css/style.css": "app/static/css/style.min.css"}
+css_map = {"static/css/style.css": "static/css/style.min.css"}
 
 # Map un-minified JavaScript source files to minified JavaScript destination files
-js_map = {"app/static/js/app.js": "app/static/js/app.min.js"}
+js_map = {"static/js/app.js": "static/js/app.min.js"}
 
 
 def compile_sass_to_css(sass_map):

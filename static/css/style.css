@@ -1,80 +1,53 @@
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%; }
+
 body {
-  background: #fafafa;
-  color: #333333;
-  margin-top: 5rem;
-}
+  font-family: Quicksand; }
 
-h1, h2, h3, h4, h5, h6 {
-  color: #444444;
-}
+header {
+  width: 100%;
+  height: 100vh;
+  background: #eafbea; }
 
-.bg-steel {
-  background-color: #5f788a;
-}
+.logo {
+  position: fixed;
+  float: left;
+  margin: 16px 36px;
+  color: #fff;
+  font-weight: bold;
+  font-size: 24px; }
 
-.site-header .navbar-nav .nav-link {
-  color: #cbd5db;
-}
+nav {
+  position: fixed;
+  width: 100%; }
 
-.site-header .navbar-nav .nav-link:hover {
-  color: #ffffff;
-}
+.menu_list {
+  list-style: none;
+  background: rgba(0, 0, 0, 0);
+  overflow: hidden;
+  color: #fff;
+  padding: 0;
+  text-align: center;
+  margin: 0;
+  transition: 1s; }
+  .menu_list_icon {
+    width: 100%;
+    background: #000;
+    text-align: right;
+    box-sizing: border-box;
+    padding: 15px 24px;
+    cursor: pointer;
+    color: #fff;
+    display: none; }
+  .menu_list--item {
+    display: inline-block;
+    padding: 20px; }
+  .menu_list--link {
+    text-decoration: none;
+    color: #fff;
+    font-size: 20px; }
 
-.site-header .navbar-nav .nav-link.active {
-  font-weight: 500;
-}
-
-.content-section {
-  background: #ffffff;
-  padding: 10px 20px;
-  border: 1px solid #dddddd;
-  border-radius: 3px;
-  margin-bottom: 20px;
-}
-
-.article-title {
-  color: #444444;
-}
-
-a.article-title:hover {
-  color: #428bca;
-  text-decoration: none;
-}
-
-.article-content {
-  white-space: pre-line;
-}
-
-.article-img {
-  height: 65px;
-  width: 65px;
-  margin-right: 16px;
-}
-
-.article-metadata {
-  padding-bottom: 1px;
-  margin-bottom: 4px;
-  border-bottom: 1px solid #e3e3e3
-}
-
-.article-metadata a:hover {
-  color: #333;
-  text-decoration: none;
-}
-
-.article-svg {
-  width: 25px;
-  height: 25px;
-  vertical-align: middle;
-}
-
-.account-img {
-  height: 125px;
-  width: 125px;
-  margin-right: 20px;
-  margin-bottom: 16px;
-}
-
-.account-heading {
-  font-size: 2.5rem;
-}
+nav.black ul {
+  background: #000; }
