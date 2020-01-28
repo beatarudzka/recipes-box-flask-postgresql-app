@@ -11,6 +11,9 @@ header {
   height: 100vh;
   background: #eafbea; }
 
+.wrapper {
+  background: #000; }
+
 .logo {
   position: fixed;
   float: left;
@@ -23,6 +26,16 @@ nav {
   position: fixed;
   width: 100%; }
 
+.menu_icon {
+  width: 100%;
+  background: #000;
+  text-align: right;
+  box-sizing: border-box;
+  padding: 15px 24px;
+  cursor: pointer;
+  color: #fff;
+  display: none; }
+
 .menu_list {
   list-style: none;
   background: rgba(0, 0, 0, 0);
@@ -32,15 +45,6 @@ nav {
   text-align: center;
   margin: 0;
   transition: 1s; }
-  .menu_list_icon {
-    width: 100%;
-    background: #000;
-    text-align: right;
-    box-sizing: border-box;
-    padding: 15px 24px;
-    cursor: pointer;
-    color: #fff;
-    display: none; }
   .menu_list--item {
     display: inline-block;
     padding: 20px; }
@@ -51,3 +55,19 @@ nav {
 
 nav.black ul {
   background: #000; }
+
+@media (max-width: 580px) {
+  .logo {
+    position: fixed;
+    top: 0;
+    margin-top: 16px; }
+  .menu_list {
+    max-height: 0px;
+    background: #000; }
+    .menu_list--list {
+      box-sizing: border-box;
+      width: 100%;
+      padding: 24px 0;
+      text-align: center; }
+    .menu_list_icon {
+      display: block; } }

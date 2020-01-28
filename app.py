@@ -31,11 +31,6 @@ def add():
     return render_template('add.html')
 
 
-@app.route("/recipes")
-def recipes():
-    return render_template('recipes.html')
-
-
 @app.route("/register", methods=['GET', 'POST'])
 def register():
     form = RegistrationForm()
