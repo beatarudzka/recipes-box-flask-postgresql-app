@@ -16,6 +16,7 @@ class User(db.Model):
     image_file = db.Column(db.String(20), nullable=False,
                            default='default.jpg')
     password = db.Column(db.String(60), nullable=False)
+    recipes = db.relationship('Recipe', backref='author', lazy=True)
 
     def __repr__(self):
         return f"User('{self.username}', '{self.email}', '{self.image_file}')"
@@ -29,9 +30,10 @@ class Recipe(db.Model):
     content = db.Column(db.Text, nullable=False)
     image_file_recipe = db.Column(db.String(20), nullable=False,
                                   default='default_recipe.jpg')
+    user_id = db.Column(db.Integer, db.ForeignKey('user_id'), nullable=False)
 
     def __repr__(self):
-        return f"Recipe('{self.title}', '{self.date_posted}', '{self.image_file_recipe')"
+        return f"Recipe('{self.title}', '{self.date_posted}', '{self.image_file_recipe}')"
 
 
 recipes = [
