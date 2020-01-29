@@ -224,3 +224,23 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///site.db'
 
 db = SQLAlchemy(app)
 ```
+
+After creating tables, import database from application file:
+
+```
+$ python
+
+>>> from app import db
+>>> db.create_all()
+>>> from app import User, Recipe
+```
+
+After that, create user and add into a database:
+
+```
+>>> user_1 = User(username='user', email='user@gmail.com', password='password')
+>>> db.session.add(user_1)
+
+```
+
+![Structure](images/structure.png)
