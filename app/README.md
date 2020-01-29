@@ -208,3 +208,39 @@ Add to app.py:
 ```
   <link rel="stylesheet" href="{{ url_for('static', filename='css/style.min.css') }}">
 ```
+
+## 4. Creating database with flask-SQLAlchemy.
+
+
+install new package in virtual env:
+
+``` 
+pip install flask-sqlalchemy
+```
+and import into application. After that, choose location of database and create database instance:
+
+```
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///site.db'
+
+db = SQLAlchemy(app)
+```
+
+After creating tables, import database from application file:
+
+```
+$ python
+
+>>> from app import db
+>>> db.create_all()
+>>> from app import User, Recipe
+```
+
+After that, create user and add into a database:
+
+```
+>>> user_1 = User(username='user', email='user@gmail.com', password='password')
+>>> db.session.add(user_1)
+
+```
+
+![Structure](images/structure.png)
