@@ -4,7 +4,7 @@ Boilerplate how to get started using the Flask framework.
 - [x] create new virtual env and install the necessary packages and get a basic Hello World Application running in our browser. 
 - [x] create register and login form using wtforms
 - [x] adding styling(used sass pre-processor - libsass)
-- [ ] database with Flask-SQLAlchemy
+- [x] database with Flask-SQLAlchemy
 - [ ] user authentication
 - [ ] creating user account with uploading the picture
 - [ ] adding pagination
@@ -244,3 +244,18 @@ After that, create user and add into a database:
 ```
 
 ![Structure](images/structure.png)
+
+
+## 4. User Authentication.
+
+```
+pip install flask-bcrypt
+
+```
+
+Flask-Bcrypt is a Flask extension that provides bcrypt hashing utilities for application.
+To use the extension simply import the class wrapper and pass the Flask app object.
+
+What is hashing function? It takes plain text and turns into a string of text that always has the same length. And it works only one way.
+
+Bcrypt takes a password as input along with a salt and a cost. Salt is a fixed-length cryptographically-strong random value that is added to the input of hash functions to create unique hashes for every input. A salt is added to make a password hash output unique even for users adopting common passwords. 
