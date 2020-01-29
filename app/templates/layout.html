@@ -32,8 +32,12 @@
             <li><a class="nav-item nav-link" href="{{ url_for('add')}}">Add recipe!</a></li>
           </div>
           <div class="navbar-nav">
+            {% if current_user.is_authenticated %}
+            <li><a class="nav-item nav-link" href="{{ url_for('logout')}}">Log out</a></li>
+            {% else %}
             <li><a class="nav-item nav-link" href="{{ url_for('login')}}">Log in</a></li>
             <li><a class="nav-item nav-link" href="{{ url_for('register')}}">Register</a></li>
+            {% endif %}
           </div>
         </div>
       </div>
