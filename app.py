@@ -1,9 +1,13 @@
 from flask import Flask, render_template, url_for, flash, redirect
+from flask_sqlalchemy import SQLAlchemy
 from forms import RegistrationForm, LoginForm
 
 app = Flask(__name__)
-
 app.config['SECRET_KEY'] = '88438def1dc83dcc3ca5f07362d4a5df'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///site.db'
+db = SQLAlchemy(app)
+
+
 recipes = [
     {
         'author': 'Beata Rudzka',
