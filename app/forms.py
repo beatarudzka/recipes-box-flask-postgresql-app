@@ -1,4 +1,5 @@
 from flask_wtf import FlaskForm
+from flask_wtf.file import FileField , FileAllowed 
 from flask_login import current_user
 from wtforms import StringField, PasswordField, SubmitField, BooleanField
 from wtforms.validators import DataRequired, Length, Email, EqualTo, ValidationError
@@ -7,48 +8,49 @@ from app.models import User
 
 
 class RegistrationForm(FlaskForm):
-    username = StringField('Username',
+    username = StringField('Nazwa użytkownika',
                            validators=[DataRequired(), Length(min=2, max=20)])
     email = StringField('Email',
                         validators=[DataRequired(), Email()])
-    password = PasswordField('Password', validators=[DataRequired()])
-    confirm_password = PasswordField('Confirm Password',
+    password = PasswordField('Hasło', validators=[DataRequired()])
+    confirm_password = PasswordField('Potwierdź hasło',
                                      validators=[DataRequired(), EqualTo('password')])
-    submit = SubmitField('Sign Up')
+    submit = SubmitField('Zarejestruj się')
 
     def validate_username(self, username):
         user = User.query.filter_by(username=username.data).first() 
         if user:
-            raise ValidationError('That username is already taken. Please use different one')
+            raise ValidationError('Nazwa użytkownika jest zajęta. Wybierz inną nazwę użytkownika')
 
     def validate_email(self, email):
         user = User.query.filter_by(email=email.data).first() 
         if user:
-            raise ValidationError('That email is already taken. Please use different one')
+            raise ValidationError('Ten email jest zajęty przez innego użytkownika. Wpisz inny email')
             
 class LoginForm(FlaskForm):
     email = StringField('Email',
                         validators=[DataRequired(), Email()])
-    password = PasswordField('Password', validators=[DataRequired()])
-    remember = BooleanField('Remember Me')
+    password = PasswordField('Hasło', validators=[DataRequired()])
+    remember = BooleanField('Zapamiętaj mnie')
     submit = SubmitField('Login')
 
 class UpdateAccountForm(FlaskForm):
-    username = StringField('Username',
+    username = StringField('Nazwa użytkownika',
                            validators=[DataRequired(), Length(min=2, max=20)])
     email = StringField('Email',
                         validators=[DataRequired(), Email()])
-    submit = SubmitField('Update')
+    picture = FileField('Zmień zdjęcie profilowe', validators=[FileAllowed(['jpg', 'png'])])
+    submit = SubmitField('Zmień dane profilowe')
 
     def validate_username(self, username):
         if username.data != current_user.username:
             user = User.query.filter_by(username=username.data).first() 
             if user:
-                raise ValidationError('That username is already taken. Please use different one')
+                raise ValidationError('Nazwa użytkownika jest zajęta. Wybierz inną nazwę użytkownika')
 
     def validate_email(self, email):
         if email.data != current_user.email:
             user = User.query.filter_by(email=email.data).first() 
             if user:
-                raise ValidationError('That email is already taken. Please use different one')
+                raise ValidationError('Ten email jest zajęty przez innego użytkownika. Wpisz inny email')
             
