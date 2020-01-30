@@ -12,7 +12,7 @@ class User(db.Model, UserMixin):
     username = db.Column(db.String(20), unique=True, nullable=False)
     email = db.Column(db.String(120), unique=True, nullable=False)
     image_file = db.Column(db.String(20), nullable=False,
-                           default='default.jpg')
+                           default='default.png')
     password = db.Column(db.String(60), nullable=False)
     recipes = db.relationship('Recipe', backref='author', lazy=True)
 
@@ -27,7 +27,7 @@ class Recipe(db.Model):
                             default=datetime.utcnow)
     content = db.Column(db.Text, nullable=False)
     image_file_recipe = db.Column(db.String(20), nullable=False,
-                                  default='default_recipe.jpg')
+                                  default='default_recipe.png')
     ingredients = db.Column(db.Text, nullable=False)
     tag = db.Column(db.Text, nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
