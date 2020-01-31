@@ -259,3 +259,30 @@ To use the extension simply import the class wrapper and pass the Flask app obje
 What is hashing function? It takes plain text and turns into a string of text that always has the same length. And it works only one way.
 
 Bcrypt takes a password as input along with a salt and a cost. Salt is a fixed-length cryptographically-strong random value that is added to the input of hash functions to create unique hashes for every input. A salt is added to make a password hash output unique even for users adopting common passwords. 
+
+
+## 4. Adding recipes into development database (sqlite).
+
+```
+@app.route("/recipe/new", methods=['GET', 'POST'])
+@login_required
+def new_recipe():
+    form = RecipeForm()
+    if form.validate_on_submit():
+        recipe = Recipe(title=form.title.data, content=form.content.data, ingredients=form.ingredients.data, image_file_recipe=form.picture.data, tag=form.tag.data, author=current_user)
+        db.session.add(recipe)
+        db.session.commit()
+        flash('Twój przepis został dodany!', 'success')
+        return redirect(url_for('home'))
+    return render_template('new_recipe.html', title='New Title', form=form)
+```
+
+ validate_on_submit will check if it is a POST request and if it is valid.
+
+ On the home route add variable recipes, which gather all those recipes from the database:
+
+ ```
+ def home():
+    recipes = Recipe.query.all()
+    return render_template('home.html', recipes=recipes)
+```

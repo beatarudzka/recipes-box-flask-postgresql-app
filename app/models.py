@@ -27,9 +27,8 @@ class Recipe(db.Model):
                             default=datetime.utcnow)
     content = db.Column(db.Text, nullable=False)
     image_file_recipe = db.Column(db.String(20), nullable=False,
-                                  default='default_recipe.png')
+                                  default='default.png')
     ingredients = db.Column(db.Text, nullable=False)
-    tag = db.Column(db.Text, nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
 
     def __repr__(self):

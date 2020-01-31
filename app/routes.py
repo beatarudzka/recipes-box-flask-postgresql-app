@@ -85,13 +85,26 @@ def account():
     image_file = url_for('static', filename='images/defaultpicuser/' + current_user.image_file)
     return render_template('account.html', title='Account', image_file=image_file, form=form)
 
+def save_picture_recipe(form_picture):
+    random_hex = secrets.token_hex(8)
+    _, f_ext = os.path.splitext(form_picture.filename)
+    picture_fn = random_hex + f_ext
+    picture_path = os.path.join(app.root_path, 'static/images/recipes', picture_fn )
+
+    output_size = (125, 125)
+    i = Image.open(form_picture)
+    i.thumbnail(output_size)
+
+    i.save(picture_path)
+
+    return picture_fn
 
 @app.route("/recipe/new", methods=['GET', 'POST'])
 @login_required
 def new_recipe():
     form = RecipeForm()
     if form.validate_on_submit():
-        recipe = Recipe(title=form.title.data, content=form.content.data, ingredients=form.ingredients.data, image_file_recipe=form.picture.data, tag=form.tag.data, author=current_user)
+        recipe = Recipe(title=form.title.data, content=form.content.data, ingredients=form.ingredients.data, image_file_recipe=form.picture.data, author=current_user)
         db.session.add(recipe)
         db.session.commit()
         flash('Twój przepis został dodany!', 'success')

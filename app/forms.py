@@ -60,6 +60,5 @@ class RecipeForm(FlaskForm):
     content = TextAreaField('Opis', validators=[DataRequired()])
     ingredients = TextAreaField('Składniki', validators=[DataRequired()])
     picture = FileField('Dodaj zdjęcie')  
-    tag = StringField('Znaczniki(tagi)', validators=[DataRequired()])
     submit = SubmitField('Dodaj przepis')  
              

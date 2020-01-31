@@ -12,11 +12,9 @@
   <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
     crossorigin="anonymous"></script>
   <link href="https://fonts.googleapis.com/css?family=Quicksand:500" rel="stylesheet">
-  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.min.css') }}">
     <link rel="stylesheet" type="text/css" href="static/fonts/font-awesome-4.2.0/css/font-awesome.min.css" />
     <link href='http://fonts.googleapis.com/css?family=Raleway:400,800,300' rel='stylesheet' type='text/css'>
-    <link rel="stylesheet" type="text/css" href="app/static/css/normalize.css" />
-		<link rel="stylesheet" type="text/css" href="app/staticcss/demo.css" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.min.css') }}">
   <title>Przepiśnik</title>
 </head>
 
@@ -49,35 +47,20 @@
     </nav>
   </header>
 
-  <main role="main" class="container">
-    <div class="row">
-      <div class="col-md-8">
-        {% with messages = get_flashed_messages(with_categories=true) %}
-        {% if messages %}
-        {% for category, message in messages%}
-        <div class="alert alert-{{ category }}">
-          {{message}}
-        </div>
-        {% endfor %}
-        {% endif %}
-        {% endwith%}
-        {% block content %}{% endblock %}
+  <div class="content">
+      {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+      {% for category, message in messages%}
+      <div class="alert alert-{{ category }}">
+        {{message}}
       </div>
-      <div class="col-md-4">
-        <div class="content-section">
-          <h3>Zobacz także</h3>
-          <p class='text-muted'>Ostatnio dodane przepisy:
-            <ul class="list-group">
-              <li class="list-group-item list-group-item-light">Kuchnia indyjska</li>
-              <li class="list-group-item list-group-item-light">Kolacje na ciepło</li>
-              <li class="list-group-item list-group-item-light">Zapiekanki</li>
-            </ul>
-          </p>
-        </div>
-      </div>
-    </div>
-  </main>
+      {% endfor %}
+      {% endif %}
+      {% endwith%}
+      {% block content %}{% endblock %}
   </div>
+
+
   <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
     integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
     crossorigin="anonymous"></script>
