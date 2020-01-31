@@ -169,6 +169,79 @@ figure.effect-milo:hover p {
   -webkit-transform: translate3d(0, 0, 0);
   transform: translate3d(0, 0, 0); }
 
+.recipe_title {
+  color: #fff; }
+
+figure.effect-milo p.icon-links a {
+  float: right;
+  color: #fff;
+  font-size: 1.4em; }
+
+figure.effect-milo:hover p.icon-links a:hover,
+figure.effect-milo:hover p.icon-links a:focus {
+  color: #fff; }
+
+figure.effect-milo p.description {
+  position: absolute;
+  bottom: 8em;
+  padding: 2em;
+  color: #fff;
+  text-transform: none;
+  font-size: 90%;
+  opacity: 0;
+  -webkit-backface-visibility: hidden;
+  /* Fix for Chrome 37.0.2062.120 (Mac) */
+  -webkit-transition: opacity 0.35s;
+  transition: opacity 0.35s;
+  -webkit-backface-visibility: hidden;
+  /* Fix for Chrome 37.0.2062.120 (Mac) */ }
+
+figure.effect-milo p.icon-links a {
+  -webkit-transition: -webkit-transform 0.35s;
+  transition: transform 0.35s;
+  -webkit-transform: translate3d(0, 200%, 0);
+  transform: translate3d(0, 200%, 0); }
+
+figure.effect-milo p.icon-links a span::before {
+  display: inline-block;
+  padding: 8px 10px;
+  font-family: 'feathericons';
+  speak: none;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale; }
+
+.icon-eye::before {
+  content: '\e000'; }
+
+.icon-paper-clip::before {
+  content: '\e001'; }
+
+.icon-heart::before {
+  content: '\e024'; }
+
+figure.effect-milo h2 {
+  display: inline-block; }
+
+figure.effect-milo:hover p.description {
+  opacity: 1; }
+
+figure.effect-milo:hover figcaption,
+figure.effect-milo:hover p.icon-links a {
+  -webkit-transform: translate3d(0, 0, 0);
+  transform: translate3d(0, 0, 0); }
+
+figure.effect-milo:hover p.icon-links a:nth-child(3) {
+  -webkit-transition-delay: 0.1s;
+  transition-delay: 0.1s; }
+
+figure.effect-milo:hover p.icon-links a:nth-child(2) {
+  -webkit-transition-delay: 0.15s;
+  transition-delay: 0.15s; }
+
+figure.effect-milo:hover p.icon-links a:first-child {
+  -webkit-transition-delay: 0.2s;
+  transition-delay: 0.2s; }
+
 @media screen and (max-width: 50em) {
   .grid figure {
     display: inline-block;
