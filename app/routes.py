@@ -3,35 +3,17 @@ import secrets
 from PIL import Image
 from flask import render_template, url_for, flash, redirect, request
 from app import app, db, bcrypt
-from app.forms import RegistrationForm, LoginForm, UpdateAccountForm
+from app.forms import RegistrationForm, LoginForm, UpdateAccountForm, RecipeForm
 from app.models import User, Recipe
 from flask_login import login_user, current_user, logout_user, login_required
-
-recipes=[
-    {
-        'author': 'Beata Rudzka',
-        'title': 'Title1',
-        'content': 'Content1',
-        'date_posted': 'January 21 2020'
-    },
-    {
-        'author': 'Beata Rudzka',
-        'title': 'Title2',
-        'content': 'Content2',
-        'date_posted': 'January 21 2020'
-    }
-]
 
 
 @app.route("/")
 @app.route("/home")
 def home():
+    recipes = Recipe.query.all()
     return render_template('home.html', recipes=recipes)
 
-
-@app.route("/add")
-def add():
-    return render_template('add.html')
 
 
 @app.route("/register", methods=['GET', 'POST'])
@@ -102,3 +84,17 @@ def account():
         form.email.data =current_user.email
     image_file = url_for('static', filename='images/defaultpicuser/' + current_user.image_file)
     return render_template('account.html', title='Account', image_file=image_file, form=form)
+
+
+@app.route("/recipe/new", methods=['GET', 'POST'])
+@login_required
+def new_recipe():
+    form = RecipeForm()
+    if form.validate_on_submit():
+        recipe = Recipe(title=form.title.data, content=form.content.data, ingredients=form.ingredients.data, image_file_recipe=form.picture.data, tag=form.tag.data, author=current_user)
+        db.session.add(recipe)
+        db.session.commit()
+        flash('Twój przepis został dodany!', 'success')
+        return redirect(url_for('home'))
+    return render_template('new_recipe.html', title='New Title', form=form)
+

@@ -29,10 +29,10 @@
         <div class="collapse navbar-collapse" id="navbarToggle">
           <div class="navbar-nav mr-auto">
             <li><a class="nav-item nav-link" href="{{ url_for('home')}}">Home</a></li>
-            <li><a class="nav-item nav-link" href="{{ url_for('add')}}">Dodaj przepis!</a></li>
           </div>
           <div class="navbar-nav">
             {% if current_user.is_authenticated %}
+            <li><a class="nav-item nav-link" href="{{ url_for('new_recipe')}}">Dodaj przepis!</a></li>
             <li><a class="nav-item nav-link" href="{{ url_for('account')}}">Konto</a></li>
             <li><a class="nav-item nav-link" href="{{ url_for('logout')}}">Wyloguj się</a></li>
             {% else %}

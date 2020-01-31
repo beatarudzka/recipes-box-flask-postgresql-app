@@ -1,7 +1,7 @@
 from flask_wtf import FlaskForm
 from flask_wtf.file import FileField , FileAllowed 
 from flask_login import current_user
-from wtforms import StringField, PasswordField, SubmitField, BooleanField
+from wtforms import StringField, PasswordField, SubmitField, BooleanField, TextAreaField
 from wtforms.validators import DataRequired, Length, Email, EqualTo, ValidationError
 from app.models import User
 
@@ -53,4 +53,13 @@ class UpdateAccountForm(FlaskForm):
             user = User.query.filter_by(email=email.data).first() 
             if user:
                 raise ValidationError('Ten email jest zajęty przez innego użytkownika. Wpisz inny email')
-            
+
+class RecipeForm(FlaskForm):
+    title = StringField('Tytuł',
+                           validators=[DataRequired()])
+    content = TextAreaField('Opis', validators=[DataRequired()])
+    ingredients = TextAreaField('Składniki', validators=[DataRequired()])
+    picture = FileField('Dodaj zdjęcie')  
+    tag = StringField('Znaczniki(tagi)', validators=[DataRequired()])
+    submit = SubmitField('Dodaj przepis')  
+             
