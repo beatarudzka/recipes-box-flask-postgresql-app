@@ -129,7 +129,7 @@ On the port 5000 it will show Hello world.
 
 
 
-## 3.Forms and User Input.
+## 4.Forms and User Input.
 
 ```
 pip install flask-wtf
@@ -145,7 +145,7 @@ Build new forms according to documentation using packages below:
 - redirect
 
 
-## 3.Styling with pre-processors SASS.
+## 5.Styling with pre-processors SASS.
 
 In the virtual env install new packages:
 
@@ -209,7 +209,7 @@ Add to app.py:
   <link rel="stylesheet" href="{{ url_for('static', filename='css/style.min.css') }}">
 ```
 
-## 4. Creating database with flask-SQLAlchemy.
+## 6. Creating database with flask-SQLAlchemy.
 
 
 install new package in virtual env:
@@ -246,7 +246,7 @@ After that, create user and add into a database:
 ![Structure](images/structure.png)
 
 
-## 4. User Authentication.
+## 7. User Authentication.
 
 ```
 pip install flask-bcrypt
@@ -261,7 +261,7 @@ What is hashing function? It takes plain text and turns into a string of text th
 Bcrypt takes a password as input along with a salt and a cost. Salt is a fixed-length cryptographically-strong random value that is added to the input of hash functions to create unique hashes for every input. A salt is added to make a password hash output unique even for users adopting common passwords. 
 
 
-## 4. Adding recipes into development database (sqlite).
+## 8. Adding recipes into development database (sqlite).
 
 ```
 @app.route("/recipe/new", methods=['GET', 'POST'])
@@ -286,3 +286,21 @@ def new_recipe():
     recipes = Recipe.query.all()
     return render_template('home.html', recipes=recipes)
 ```
+
+
+#### 8.1. Adding photos from user.
+
+In the html add form:
+
+```
+
+<form action="/upload-image" method="POST" enctype="multipart/form-data">
+
+</form>
+
+```
+
+enctype="multipart/form-data" allows to send files and upload from database. 
+We'll be making a POST request to the server, so we've added methods=["GET", "POST"] to the route.
+
+There are two parts, the client index.html which asks the user to browse for a file, the client then sends a multipart POST (enctype="multipart/form-data") request and the server back-end python side where it accepts the file and saves it on the server. 

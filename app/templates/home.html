@@ -1,11 +1,11 @@
-{% extends 'home_layout.html' %}
+{% extends 'layout.html' %}
 {% block content%}
 {% for recipe in recipes %}
 
 <div class="content">
   <div class="grid">
     <figure class="effect-milo">
-      <img src="{{ url_for('static', filename='images/' + '26.jpg') }}" alt="img11"/>
+      <img src="{{ url_for('static', filename='images/' + '26.jpg') }}" alt="Photo of"/>
       <figcaption>
         <h2 class="recipe_title">{{ recipe.title }}</h2>
         <p>{{ recipe.author.username }}</p>
