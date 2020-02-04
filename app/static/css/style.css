@@ -1,8 +1,21 @@
+*, *:after, *:before {
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box; }
+
+.clearfix:before, .clearfix:after {
+  display: table;
+  content: ''; }
+
+.clearfix:after {
+  clear: both; }
+
 .fa,
 .fas {
   font-family: 'Font Awesome 5 Free';
   font-weight: 900;
-  color: #fff; }
+  color: #fff;
+  width: 1.4rem;
+  height: 1.4rem; }
 
 body {
   background: #fafafa;
@@ -133,121 +146,93 @@ a.recipe-title:hover {
   letter-spacing: 1px;
   font-size: 68.5%; }
 
-figure.effect-milo {
-  background: #2e5d5a; }
+figure.effect-winston {
+  background: #162633;
+  text-align: left; }
 
-figure.effect-milo img {
-  max-width: none;
-  width: -webkit-calc(100% + 60px);
-  width: calc(100% + 60px);
-  opacity: 1;
-  -webkit-transition: opacity 0.35s, -webkit-transform 0.35s;
-  transition: opacity 0.35s, transform 0.35s;
-  -webkit-transform: translate3d(-30px, 0, 0) scale(1.12);
-  transform: translate3d(-30px, 0, 0) scale(1.12);
+figure.effect-winston img {
+  -webkit-transition: opacity 0.45s;
+  transition: opacity 0.45s;
   -webkit-backface-visibility: hidden;
   backface-visibility: hidden; }
 
-figure.effect-milo:hover img {
-  opacity: 0.5;
-  -webkit-transform: translate3d(0, 0, 0) scale(1);
-  transform: translate3d(0, 0, 0) scale(1); }
+figure.effect-winston figcaption::before {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url(../images/triangle.svg) no-repeat center center;
+  background-size: 100% 100%;
+  content: '';
+  -webkit-transition: opacity 0.45s, -webkit-transform 0.45s;
+  transition: opacity 0.45s, transform 0.45s;
+  -webkit-transform: rotate3d(0, 0, 1, 45deg);
+  transform: rotate3d(0, 0, 1, 45deg);
+  -webkit-transform-origin: 0 100%;
+  transform-origin: 0 100%; }
 
-figure.effect-milo h2 {
+figure.effect-winston h2 {
+  -webkit-transition: -webkit-transform 0.35s;
+  transition: transform 0.35s;
+  -webkit-transform: translate3d(0, 20px, 0);
+  transform: translate3d(0, 20px, 0); }
+
+figure.effect-winston p {
   position: absolute;
   right: 0;
   bottom: 0;
-  padding: 1em 1.2em; }
+  padding: 0 1.5em 7% 0; }
 
-figure.effect-milo p {
-  padding: 0 10px 0 0;
-  width: 50%;
-  border-right: 1px solid #fff;
-  text-align: right;
+figure.effect-winston a {
+  margin: 0 10px;
+  color: #5d504f;
+  font-size: 170%; }
+
+figure.effect-winston a:hover,
+figure.effect-winston a:focus {
+  color: #cc6055; }
+
+figure.effect-winston p a i {
   opacity: 0;
   -webkit-transition: opacity 0.35s, -webkit-transform 0.35s;
   transition: opacity 0.35s, transform 0.35s;
-  -webkit-transform: translate3d(-40px, 0, 0);
-  transform: translate3d(-40px, 0, 0); }
+  -webkit-transform: translate3d(0, 50px, 0);
+  transform: translate3d(0, 50px, 0); }
 
-figure.effect-milo:hover p {
+figure.effect-winston:hover img {
+  opacity: 0.6; }
+
+figure.effect-winston:hover h2 {
+  -webkit-transform: translate3d(0, 0, 0);
+  transform: translate3d(0, 0, 0); }
+
+figure.effect-winston:hover figcaption::before {
+  opacity: 0.7;
+  -webkit-transform: rotate3d(0, 0, 1, 20deg);
+  transform: rotate3d(0, 0, 1, 20deg); }
+
+figure.effect-winston:hover p i {
   opacity: 1;
   -webkit-transform: translate3d(0, 0, 0);
   transform: translate3d(0, 0, 0); }
 
-.recipe_title {
-  color: #fff; }
+figure.effect-winston:hover p a:nth-child(3) i {
+  -webkit-transition-delay: 0.05s;
+  transition-delay: 0.05s; }
 
-figure.effect-milo p.icon-links a {
-  float: right;
-  color: #fff;
-  font-size: 1.4em; }
-
-figure.effect-milo:hover p.icon-links a:hover,
-figure.effect-milo:hover p.icon-links a:focus {
-  color: #fff; }
-
-figure.effect-milo p.description {
-  position: absolute;
-  bottom: 8em;
-  padding: 2em;
-  color: #fff;
-  text-transform: none;
-  font-size: 90%;
-  opacity: 0;
-  -webkit-backface-visibility: hidden;
-  /* Fix for Chrome 37.0.2062.120 (Mac) */
-  -webkit-transition: opacity 0.35s;
-  transition: opacity 0.35s;
-  -webkit-backface-visibility: hidden;
-  /* Fix for Chrome 37.0.2062.120 (Mac) */ }
-
-figure.effect-milo p.icon-links a {
-  -webkit-transition: -webkit-transform 0.35s;
-  transition: transform 0.35s;
-  -webkit-transform: translate3d(0, 200%, 0);
-  transform: translate3d(0, 200%, 0); }
-
-figure.effect-milo p.icon-links a span::before {
-  display: inline-block;
-  padding: 8px 10px;
-  speak: none;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale; }
-
-.icon-eye::before {
-  content: '\e000'; }
-
-.icon-paper-clip::before {
-  content: '\e001'; }
-
-.icon-heart::before {
-  content: '\e024'; }
-
-figure.effect-milo h2 {
-  display: inline-block; }
-
-figure.effect-milo:hover p.description {
-  opacity: 1; }
-
-figure.effect-milo:hover figcaption,
-figure.effect-milo:hover p.icon-links a {
-  -webkit-transform: translate3d(0, 0, 0);
-  transform: translate3d(0, 0, 0); }
-
-figure.effect-milo:hover p.icon-links a:nth-child(3) {
+figure.effect-winston:hover p a:nth-child(2) i {
   -webkit-transition-delay: 0.1s;
   transition-delay: 0.1s; }
 
-figure.effect-milo:hover p.icon-links a:nth-child(2) {
+figure.effect-winston:hover p a:first-child i {
   -webkit-transition-delay: 0.15s;
   transition-delay: 0.15s; }
 
-figure.effect-milo:hover p.icon-links a:first-child {
-  -webkit-transition-delay: 0.2s;
-  transition-delay: 0.2s; }
-
 @media screen and (max-width: 50em) {
+  .content {
+    padding: 0 10px;
+    text-align: center; }
   .grid figure {
     display: inline-block;
     float: none;

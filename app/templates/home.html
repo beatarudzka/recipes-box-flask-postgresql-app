@@ -4,19 +4,23 @@
 
 <div class="content">
   <div class="grid">
-    <figure class="effect-milo">
+    <figure class="effect-winston">
       <img src="{{ url_for('static', filename='images/' + '26.jpg') }}" alt="img11"/>
       <figcaption>
-        <h2 class="recipe_title">{{ recipe.title }}</h2>
-        <p>{{ recipe.author.username }}</p>
-        <a href="#">View more</a>
-          <a href="#"><i class="fas fa-edt"></i></a>
-          <a href="#"><i class="fas fa-trash-alt"></i></a>
-          <a href="#"><i class="fas fa-heart"></i></a>
+        <!-- <p class="">{{ recipe.author.username }}</p> -->
+        <h2><span>{{ recipe.title }}</span></h2>
+        <p>
+          <a href="#"><i class="fa fa-fw fa-star-o"></i></a>
+          <a href="#"><i class="fa fa-fw fa-edit"></i></a>
+          <a href="#"><i class="fa fa-fw fa-trash-o"></i></a>
+        </p>
       </figcaption>			
     </figure>
   </div>
 </div>
 
+
 {% endfor %}
 {% endblock content %}
+
+
