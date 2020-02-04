@@ -1,4 +1,13 @@
 
+.fa,
+.fas {
+  font-family: 'Font Awesome 5 Free';
+	font-weight: 900;
+	color:#fff;
+	width:1.4rem;
+	height:1.4rem;
+}
+
 
 body {
   background: #fafafa;
@@ -246,7 +255,7 @@ figure.effect-milo p.icon-links a {
 figure.effect-milo p.icon-links a span::before {
 	display: inline-block;
 	padding: 8px 10px;
-	font-family: 'feathericons';
+	// font-family: 'feathericons';
 	speak: none;
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
