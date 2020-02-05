@@ -25,8 +25,8 @@ def register():
         user = User(username=form.username.data, email=form.email.data, password=hashed_password)
         db.session.add(user)
         db.session.commit()
-        flash('Twoje konto zostało stworzone.', 'success')
-        return redirect(url_for('home'))
+        flash('Twoje konto zostało stworzone. Teraz możesz się zalogować', 'success')
+        return redirect(url_for('login'))
     return render_template('register.html', title='Register', form=form)
 
 
@@ -104,15 +104,22 @@ def recipe(recipe_id):
     return render_template('recipe.html', title=recipe.title, recipe=recipe)
 
 
-@app.route("/recipe/<int:recipe_id>/update")
+@app.route("/recipe/<int:recipe_id>/update", methods=['GET', 'POST'])
 @login_required
 def update_recipe(recipe_id):
     recipe = Recipe.query.get_or_404(recipe_id)
     if recipe.author != current_user:
         abort(403)
     form=RecipeForm()
-    form.title.data = recipe.title
-    form.content.data = recipe.content
-    form.ingredients.data = recipe.ingredients
+    if form.validate_on_submit():
+        recipe.title = form.title.data
+        recipe.content = form.content.data
+        recipe.ingredients = form.ingredients.data
+        db.session.commit()
+        flash('Twój przepis jest zaktualizowany', 'success')
+    elif request.method == 'GET':
+        form.title.data = recipe.title
+        form.content.data = recipe.content
+        form.ingredients.data = recipe.ingredients
     return render_template('new_recipe.html', title='Update Recipe', form=form, legend='Edytuj przepis')
 

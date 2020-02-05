@@ -7,7 +7,7 @@
     <figure class="effect-winston ">
       <img src="{{ url_for('static', filename='images/' + '26.jpg') }}" alt="Photo of recipe"/>
       <figcaption>
-        <h4><a href="{{ url_for('recipe', recipe_id=recipe.id)}}">{{ recipe.title }}</a></h4>
+        <h4><a href="{{ url_for('recipe', recipe_id=recipe.id)}}">{{recipe.title }}</a></h4>
         <p>
           <a href="#"><i class="fa fa-fw fa-star-o"></i></a>
           <a href="{{url_for('update_recipe', recipe_id=recipe.id)}}"><i class="fa fa-fw fa-edit"></i></a>
