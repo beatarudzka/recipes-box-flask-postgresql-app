@@ -110,4 +110,6 @@ def update_recipe(recipe_id):
     recipe = Recipe.query.get_or_404(recipe_id)
     if recipe.author != current_user:
         abort(403)
+    form=RecipeForm()
+    return render_template('new_recipe.html', title='Update Recipe', form=form)
 

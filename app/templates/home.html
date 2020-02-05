@@ -10,7 +10,7 @@
         <h4><a href="{{ url_for('recipe', recipe_id=recipe.id)}}">{{ recipe.title }}</a></h4>
         <p>
           <a href="#"><i class="fa fa-fw fa-star-o"></i></a>
-          <a href="#"><i class="fa fa-fw fa-edit"></i></a>
+          <a href="{{url_for('update_recipe', recipe_id=recipe.id)}}"><i class="fa fa-fw fa-edit"></i></a>
           <a href="#"><i class="fa fa-fw fa-trash-o"></i></a>
         </p>
       </figcaption>			
