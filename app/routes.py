@@ -95,7 +95,7 @@ def new_recipe():
         db.session.commit()
         flash('Twój przepis został dodany!', 'success')
         return redirect(url_for('home'))
-    return render_template('new_recipe.html', title='New Title', form=form)
+    return render_template('new_recipe.html', title='New Title', form=form, legend='Stwórz nowy przepis')
 
 
 @app.route("/recipe/<int:recipe_id>")
@@ -111,5 +111,8 @@ def update_recipe(recipe_id):
     if recipe.author != current_user:
         abort(403)
     form=RecipeForm()
-    return render_template('new_recipe.html', title='Update Recipe', form=form)
+    form.title.data = recipe.title
+    form.content.data = recipe.content
+    form.ingredients.data = recipe.ingredients
+    return render_template('new_recipe.html', title='Update Recipe', form=form, legend='Edytuj przepis')
 
