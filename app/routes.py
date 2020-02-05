@@ -15,7 +15,7 @@ def home():
 
 
 
-@app.route("/register", methods=['GET', 'POST'])
+ @app.route("/register", methods=['GET', 'POST'])
 def register():
     if current_user.is_authenticated:
         return redirect(url_for('home'))
@@ -25,8 +25,8 @@ def register():
         user = User(username=form.username.data, email=form.email.data, password=hashed_password)
         db.session.add(user)
         db.session.commit()
-        flash('Twoje konto zostało stworze. Możesz się teraz zalogować.', 'success')
-        return redirect(url_for('login'))
+        flash('Twoje konto zostało stworzone.', 'success')
+        return redirect(url_for('home'))
     return render_template('register.html', title='Register', form=form)
 
 
@@ -98,4 +98,7 @@ def new_recipe():
     return render_template('new_recipe.html', title='New Title', form=form)
 
 
-
+@app.route("/recipe/<int:recipe_id>")
+def recipe(recipe_id):
+    recipe = Recipe.query.get_or_404(post_id)
+    return render_template('recipe.html', title=recipe.title, recipe=recipe)
