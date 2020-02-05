@@ -187,11 +187,13 @@ figure.effect-winston p {
 figure.effect-winston a {
   margin: 0 10px;
   color: #5d504f;
-  font-size: 170%; }
+  font-size: 170%;
+  list-style: none; }
 
 figure.effect-winston a:hover,
 figure.effect-winston a:focus {
-  color: #cc6055; }
+  color: #cc6055;
+  list-style: none; }
 
 figure.effect-winston p a i {
   opacity: 0;
@@ -228,6 +230,23 @@ figure.effect-winston:hover p a:nth-child(2) i {
 figure.effect-winston:hover p a:first-child i {
   -webkit-transition-delay: 0.15s;
   transition-delay: 0.15s; }
+
+.card__icons {
+  font-family: 'Font Awesome 5 Free';
+  font-weight: 900;
+  color: #fff;
+  width: 1.4rem;
+  height: 1.4rem; }
+
+.card__image {
+  top: 50%;
+  left: 50%;
+  transform: translate(50%, 0%);
+  width: 50%; }
+
+.card__title {
+  color: #444444;
+  text-transform: uppercase; }
 
 @media screen and (max-width: 50em) {
   .content {

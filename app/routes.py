@@ -1,6 +1,6 @@
 import os
 from PIL import Image
-from flask import render_template, url_for, flash, redirect, request
+from flask import render_template, url_for, flash, redirect, request, abort
 from app import app, db, bcrypt
 from app.forms import RegistrationForm, LoginForm, UpdateAccountForm, RecipeForm
 from app.models import User, Recipe
@@ -15,7 +15,7 @@ def home():
 
 
 
- @app.route("/register", methods=['GET', 'POST'])
+@app.route("/register", methods=['GET', 'POST'])
 def register():
     if current_user.is_authenticated:
         return redirect(url_for('home'))
@@ -100,5 +100,14 @@ def new_recipe():
 
 @app.route("/recipe/<int:recipe_id>")
 def recipe(recipe_id):
-    recipe = Recipe.query.get_or_404(post_id)
+    recipe = Recipe.query.get_or_404(recipe_id)
     return render_template('recipe.html', title=recipe.title, recipe=recipe)
+
+
+@app.route("/recipe/<int:recipe_id>/update")
+@login_required
+def update_recipe(recipe_id):
+    recipe = Recipe.query.get_or_404(recipe_id)
+    if recipe.author != current_user:
+        abort(403)
+

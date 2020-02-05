@@ -5,7 +5,7 @@ Boilerplate how to get started using the Flask framework.
 - [x] create register and login form using wtforms
 - [x] adding styling(used sass pre-processor - libsass)
 - [x] database with Flask-SQLAlchemy
-- [ ] user authentication
+- [x] user authentication
 - [ ] creating user account with uploading the picture
 - [ ] adding pagination
 - [ ] creating custom error pages

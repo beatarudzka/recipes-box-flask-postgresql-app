@@ -4,11 +4,10 @@
 
 <div class="content">
   <div class="grid">
-    <figure class="effect-winston">
+    <figure class="effect-winston ">
       <img src="{{ url_for('static', filename='images/' + '26.jpg') }}" alt="Photo of recipe"/>
       <figcaption>
-        <!-- <p class="">{{ recipe.author.username }}</p> -->
-        <h2><span>{{ recipe.title }}</span></h2>
+        <h4><a href="{{ url_for('recipe', recipe_id=recipe.id)}}">{{ recipe.title }}</a></h4>
         <p>
           <a href="#"><i class="fa fa-fw fa-star-o"></i></a>
           <a href="#"><i class="fa fa-fw fa-edit"></i></a>
