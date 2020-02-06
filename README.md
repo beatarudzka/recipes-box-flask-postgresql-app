@@ -286,3 +286,20 @@ def new_recipe():
     recipes = Recipe.query.all()
     return render_template('home.html', recipes=recipes)
 ```
+
+#### 4.1. Adding images into database.
+
+After adding images using input (type="file", name="image"), you can print out in console name of the file:
+
+![Structure](images/filestorage.png)
+
+
+FileStorage is special flask object over incoming files. It is used by the request object to represent uploaded files. 
+Using app.config specify full path, where files will be saved:
+
+```
+app.config["IMAGE_UPLOADS"] = "/home/beatronoks/Dokumenty/Workspace/boilerplate-flask-app/app/static/images/recipes"
+
+image.save(os.path.join(app.config["IMAGE_UPLOADS"], image.filename))
+
+```

@@ -85,6 +85,7 @@ def account():
     return render_template('account.html', title='Account', image_file=image_file, form=form)
 
 
+
 @app.route("/recipe/new", methods=['GET', 'POST'])
 @login_required
 def new_recipe():
@@ -96,6 +97,22 @@ def new_recipe():
         flash('Twój przepis został dodany!', 'success')
         return redirect(url_for('home'))
     return render_template('new_recipe.html', title='New Title', form=form, legend='Stwórz nowy przepis')
+
+
+app.config["IMAGE_UPLOADS"] = "/home/beatronoks/Dokumenty/Workspace/boilerplate-flask-app/app/static/images/recipes"
+
+@app.route("/upload_image" , methods=['GET', 'POST'])
+def upload_image():
+  
+    if request.method == 'POST':
+  
+        if request.files:
+            image = request.files["image"]
+            image.save(os.path.join(app.config["IMAGE_UPLOADS"], image.filename))
+            print("imaged saved")
+            return redirect(request.url)
+
+    return render_template('upload_image.html')
 
 
 @app.route("/recipe/<int:recipe_id>")
