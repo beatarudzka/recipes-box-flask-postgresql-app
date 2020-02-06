@@ -101,7 +101,7 @@ def new_recipe():
 @app.route("/recipe/<int:recipe_id>")
 def recipe(recipe_id):
     recipe = Recipe.query.get_or_404(recipe_id)
-    return render_template('recipe.html', title=recipe.title, recipe=recipe)
+    return render_template('recipe.html', title=recipe.title,content=recipe.content, ingredients=recipe.ingredients, recipe=recipe)
 
 
 @app.route("/recipe/<int:recipe_id>/update", methods=['GET', 'POST'])
@@ -123,3 +123,13 @@ def update_recipe(recipe_id):
         form.ingredients.data = recipe.ingredients
     return render_template('new_recipe.html', title='Update Recipe', form=form, legend='Edytuj przepis')
 
+@app.route("/recipe/<int:recipe_id>/delete", methods=['POST'])
+@login_required
+def delete_recipe(recipe_id):
+    recipe = Recipe.query.get_or_404(recipe_id)
+    if recipe.author != current_user:
+        abort(403)
+    db.session.delete(recipe)
+    db.session.commit()
+    flash('Twój przepis został usuniety!', 'success')
+    return redirect(url_for('home'))
