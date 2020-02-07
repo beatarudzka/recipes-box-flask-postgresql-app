@@ -7,13 +7,28 @@
 <div class="col">
   <form action="/recipe/new/upload_image" method="POST" enctype="multipart/form-data">
       <div class="form-group">
-        <input type="file" class="custom-file-input" name="image" id="image">
+        <input type="file" class="custom-file-input" name="image" id="image" oninput="filesize(this);">
         <label for="image" class="custom-file-label">Wybierz plik z dysku:</label>
       </div>
       <button type="submit" class="btn btn-outline-info">Zapisz zdjęcie</button>
   </form>
+  <div>
+    <img src="" alt="">
+  </div>
 </div>
   
+
+
+{% endblock %}
+
+{% block script %}
+<script>
+
+  function filesize(elem){
+    document.cookie = `filesize=${elem.files[0].size}`
+  }
+
+</script>
 
 
 {% endblock %}

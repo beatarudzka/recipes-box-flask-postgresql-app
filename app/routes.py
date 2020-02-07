@@ -5,6 +5,7 @@ from app import app, db, bcrypt
 from app.forms import RegistrationForm, LoginForm, UpdateAccountForm, RecipeForm
 from app.models import User, Recipe
 from flask_login import login_user, current_user, logout_user, login_required
+from werkzeug.utils import secure_filename
 
 
 @app.route("/")
@@ -51,45 +52,58 @@ def logout():
     logout_user()
     return redirect(url_for('home'))
 
-def allowed_file(filename):
-    return '.' in filename and \
-           filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
+def allowed_image(filename):
+    if not "." in filename:
+        return False
+    extension = filename.rsplit(".", 1)[1]
 
-def save_picture_recipe(form_picture):
-    random_hex = secrets.token_hex(8)
-    _, f_ext = os.path.splitext(form_picture.filename)
-    picture_fn = random_hex + f_ext
-    picture_path = os.path.join(app.root_path, 'static/images/recipes', picture_fn )
+    if extension.lower() in app.config["ALLOWED EXTENSIONS"]:
+        return True
+    else:
+        return False
 
-    output_size = (700, 250)
-    i = Image.open(form_picture)
-    i.thumbnail(output_size)
-
-    i.save(picture_path)
-
-    return picture_fn
+def allowed_image_filesize(filesize):
+  
+    if int(filesize) <= app.config["MAX_IMAGE_FILESIZE"]:
+        return True
+    else:
+        return False
 
 
 
 @app.route("/recipe/new/upload_image" , methods=['GET', 'POST'])
 def upload_image():
     form=RecipeForm()
-  
     if request.method == 'POST':
   
         if request.files:
-            image = request.files["image"]
+            
+            if "filesize" in request.cookies:
+  
+                if not allowed_image_filesize(request.cookies["filesize"]):
+                    flash("Przekroczono limit rozmiaru zdjęcia", 'danger')
+                    return redirect(request.url)
 
-            if image.filename == '':
-                flash('Nie wybrano pliku.')
-                return redirect(request.url)
+                image = request.files["image"]
 
-            image.save(os.path.join(app.config["IMAGE_UPLOADS"], image.filename))
-            print("imaged saved")
-            return redirect(request.url)
+                if image.filename == '':
+                    flash('Nie wybrano pliku.', 'danger')
+                    return redirect(request.url)
 
-    return render_template('upload_image.html')
+                if allowed_image(image.filename):
+                    filename = secure_filename(image.filename)
 
+                    image.save(os.path.join(app.config["IMAGE_UPLOADS"], filename))
+
+                    flash("Plik zapisany", 'success')
+
+                    return redirect(request.url)
+
+                else:
+                    flash("Nie dozwolone rozszerzenie pliku. Proszę wybrać inne zdjęcie z rozszerzeniem: .jpg, .jpeg, .gif, .png", 'danger')
+                    return redirect(request.url)
+
+    return render_template("upload_image.html")
 
 def save_picture(form_picture):
     random_hex = secrets.token_hex(8)
