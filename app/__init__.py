@@ -7,6 +7,8 @@ from flask_fontawesome import FontAwesome
 app = Flask(__name__)
 app.config['SECRET_KEY'] = '88438def1dc83dcc3ca5f07362d4a5df'
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///site.db'
+app.config["IMAGE_UPLOADS"] = "/home/beatronoks/Dokumenty/Workspace/boilerplate-flask-app/app/static/images/recipes"
+app.config["ALLOWED EXTENSIONS"] = ['png', 'jpg', 'jpeg', 'gif']
 fa = FontAwesome(app)
 
 db = SQLAlchemy(app)

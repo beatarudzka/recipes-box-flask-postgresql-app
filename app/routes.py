@@ -51,6 +51,46 @@ def logout():
     logout_user()
     return redirect(url_for('home'))
 
+def allowed_file(filename):
+    return '.' in filename and \
+           filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
+
+def save_picture_recipe(form_picture):
+    random_hex = secrets.token_hex(8)
+    _, f_ext = os.path.splitext(form_picture.filename)
+    picture_fn = random_hex + f_ext
+    picture_path = os.path.join(app.root_path, 'static/images/recipes', picture_fn )
+
+    output_size = (700, 250)
+    i = Image.open(form_picture)
+    i.thumbnail(output_size)
+
+    i.save(picture_path)
+
+    return picture_fn
+
+
+
+@app.route("/recipe/new/upload_image" , methods=['GET', 'POST'])
+def upload_image():
+    form=RecipeForm()
+  
+    if request.method == 'POST':
+  
+        if request.files:
+            image = request.files["image"]
+
+            if image.filename == '':
+                flash('Nie wybrano pliku.')
+                return redirect(request.url)
+
+            image.save(os.path.join(app.config["IMAGE_UPLOADS"], image.filename))
+            print("imaged saved")
+            return redirect(request.url)
+
+    return render_template('upload_image.html')
+
+
 def save_picture(form_picture):
     random_hex = secrets.token_hex(8)
     _, f_ext = os.path.splitext(form_picture.filename)
@@ -88,7 +128,7 @@ def account():
 
 @app.route("/recipe/new", methods=['GET', 'POST'])
 @login_required
-def new_recipe():
+def new_recipe(): 
     form = RecipeForm()
     if form.validate_on_submit():
         recipe = Recipe(title=form.title.data, content=form.content.data, ingredients=form.ingredients.data, image_file_recipe=form.picture.data, author=current_user)
@@ -99,20 +139,7 @@ def new_recipe():
     return render_template('new_recipe.html', title='New Title', form=form, legend='Stwórz nowy przepis')
 
 
-app.config["IMAGE_UPLOADS"] = "/home/beatronoks/Dokumenty/Workspace/boilerplate-flask-app/app/static/images/recipes"
 
-@app.route("/upload_image" , methods=['GET', 'POST'])
-def upload_image():
-  
-    if request.method == 'POST':
-  
-        if request.files:
-            image = request.files["image"]
-            image.save(os.path.join(app.config["IMAGE_UPLOADS"], image.filename))
-            print("imaged saved")
-            return redirect(request.url)
-
-    return render_template('upload_image.html')
 
 
 @app.route("/recipe/<int:recipe_id>")
