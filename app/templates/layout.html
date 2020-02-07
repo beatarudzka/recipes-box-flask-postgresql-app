@@ -1,27 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
-    integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-  <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
-    crossorigin="anonymous"></script>
-  <link href="https://fonts.googleapis.com/css?family=Quicksand:500" rel="stylesheet">
-  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.min.css') }}">
-  <title>Recipe's box</title>
-</head>
-
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+      integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+      crossorigin="anonymous"></script>
+    <!-- <link href="https://fonts.googleapis.com/css?family=Quicksand:500" rel="stylesheet"> -->
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='font-awesome-4.2.0/css/font-awesome.min.css') }}" />
+      <link href='http://fonts.googleapis.com/css?family=Raleway:400,800,300' rel='stylesheet' type='text/css'>
+      <link rel="stylesheet" href="{{ url_for('static', filename='css/style.min.css') }}">
+      <link rel="shortcut icon" href="{{ url_for('static', filename='images/favicon.png') }}">
+    <title>OmNom</title>
+  </head>
 <body>
 
   <header class="site-header">
     <nav class="navbar navbar-expand-md navbar-dark bg-steel fixed-top">
       <div class="container">
-        <a class="navbar-brand mr-4" href="/">Recipes</a>
+        <a class="navbar-brand mr-4" href="/">OmNom</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggle"
           aria-controls="navbarToggle" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
@@ -29,11 +31,16 @@
         <div class="collapse navbar-collapse" id="navbarToggle">
           <div class="navbar-nav mr-auto">
             <li><a class="nav-item nav-link" href="{{ url_for('home')}}">Home</a></li>
-            <li><a class="nav-item nav-link" href="{{ url_for('add')}}">Add recipe!</a></li>
           </div>
           <div class="navbar-nav">
-            <li><a class="nav-item nav-link" href="{{ url_for('login')}}">Log in</a></li>
-            <li><a class="nav-item nav-link" href="{{ url_for('register')}}">Register</a></li>
+            {% if current_user.is_authenticated %}
+            <li><a class="nav-item nav-link" href="{{ url_for('new_recipe')}}">Dodaj przepis!</a></li>
+            <li><a class="nav-item nav-link" href="{{ url_for('account')}}">Konto</a></li>
+            <li><a class="nav-item nav-link" href="{{ url_for('logout')}}">Wyloguj się</a></li>
+            {% else %}
+            <li><a class="nav-item nav-link" href="{{ url_for('login')}}">Zaloguj się</a></li>
+            <li><a class="nav-item nav-link" href="{{ url_for('register')}}">Załóż konto</a></li>
+            {% endif %}
           </div>
         </div>
       </div>
@@ -56,12 +63,12 @@
       </div>
       <div class="col-md-4">
         <div class="content-section">
-          <h3>Our Sidebar</h3>
-          <p class='text-muted'>You can put any information here you'd like.
+          <h3>Zobacz także</h3>
+          <p class='text-muted'>Ostatnio dodane przepisy:
             <ul class="list-group">
-              <li class="list-group-item list-group-item-light">Latest Recipes</li>
-              <li class="list-group-item list-group-item-light">Announcements</li>
-              <li class="list-group-item list-group-item-light">Calendars</li>
+              <li class="list-group-item list-group-item-light">Kuchnia indyjska</li>
+              <li class="list-group-item list-group-item-light">Kolacje na ciepło</li>
+              <li class="list-group-item list-group-item-light">Zapiekanki</li>
             </ul>
           </p>
         </div>
@@ -69,9 +76,6 @@
     </div>
   </main>
   </div>
-
-
-
   <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
     integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
     crossorigin="anonymous"></script>

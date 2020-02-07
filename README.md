@@ -4,8 +4,8 @@ Boilerplate how to get started using the Flask framework.
 - [x] create new virtual env and install the necessary packages and get a basic Hello World Application running in our browser. 
 - [x] create register and login form using wtforms
 - [x] adding styling(used sass pre-processor - libsass)
-- [ ] database with Flask-SQLAlchemy
-- [ ] user authentication
+- [x] database with Flask-SQLAlchemy
+- [x] user authentication
 - [ ] creating user account with uploading the picture
 - [ ] adding pagination
 - [ ] creating custom error pages
@@ -129,7 +129,7 @@ On the port 5000 it will show Hello world.
 
 
 
-## 3.Forms and User Input.
+## 4.Forms and User Input.
 
 ```
 pip install flask-wtf
@@ -145,7 +145,7 @@ Build new forms according to documentation using packages below:
 - redirect
 
 
-## 3.Styling with pre-processors SASS.
+## 5.Styling with pre-processors SASS.
 
 In the virtual env install new packages:
 
@@ -209,7 +209,7 @@ Add to app.py:
   <link rel="stylesheet" href="{{ url_for('static', filename='css/style.min.css') }}">
 ```
 
-## 4. Creating database with flask-SQLAlchemy.
+## 6. Creating database with flask-SQLAlchemy.
 
 
 install new package in virtual env:
@@ -244,3 +244,63 @@ After that, create user and add into a database:
 ```
 
 ![Structure](images/structure.png)
+
+
+## 7. User Authentication.
+
+```
+pip install flask-bcrypt
+
+```
+
+Flask-Bcrypt is a Flask extension that provides bcrypt hashing utilities for application.
+To use the extension simply import the class wrapper and pass the Flask app object.
+
+What is hashing function? It takes plain text and turns into a string of text that always has the same length. And it works only one way.
+
+Bcrypt takes a password as input along with a salt and a cost. Salt is a fixed-length cryptographically-strong random value that is added to the input of hash functions to create unique hashes for every input. A salt is added to make a password hash output unique even for users adopting common passwords. 
+
+
+## 8. Adding recipes into development database (sqlite).
+
+```
+@app.route("/recipe/new", methods=['GET', 'POST'])
+@login_required
+def new_recipe():
+    form = RecipeForm()
+    if form.validate_on_submit():
+        recipe = Recipe(title=form.title.data, content=form.content.data, ingredients=form.ingredients.data, image_file_recipe=form.picture.data, tag=form.tag.data, author=current_user)
+        db.session.add(recipe)
+        db.session.commit()
+        flash('Twój przepis został dodany!', 'success')
+        return redirect(url_for('home'))
+    return render_template('new_recipe.html', title='New Title', form=form)
+```
+
+ validate_on_submit will check if it is a POST request and if it is valid.
+
+ On the home route add variable recipes, which gather all those recipes from the database:
+
+ ```
+ def home():
+    recipes = Recipe.query.all()
+    return render_template('home.html', recipes=recipes)
+```
+
+
+#### 8.1. Adding photos from user.
+
+In the html add form:
+
+```
+
+<form action="/upload-image" method="POST" enctype="multipart/form-data">
+
+</form>
+
+```
+
+enctype="multipart/form-data" allows to send files and upload from database. 
+We'll be making a POST request to the server, so we've added methods=["GET", "POST"] to the route.
+
+There are two parts, the client index.html which asks the user to browse for a file, the client then sends a multipart POST (enctype="multipart/form-data") request and the server back-end python side where it accepts the file and saves it on the server. 

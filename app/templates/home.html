@@ -1,15 +1,25 @@
 {% extends 'layout.html' %}
 {% block content%}
 {% for recipe in recipes %}
-<article class="media content-section">
-  <div class="media-body">
-    <div class="recipe-metadata">
-      <a class="mr-2" href="#">{{ recipe.author }}</a>
-      <small class="text-muted">{{ recipe.date_posted }}</small>
-    </div>
-    <h2><a class="recipe-title" href="#">{{ recipe.title }}</a></h2>
-    <p class="recipe-content">{{ recipe.content }}</p>
+
+<div class="content">
+  <div class="grid">
+    <figure class="effect-winston ">
+      <img src="{{ url_for('static', filename='images/' + '26.jpg') }}" alt="Photo of recipe"/>
+      <figcaption>
+        <h4><a href="{{ url_for('recipe', recipe_id=recipe.id)}}">{{recipe.title }}</a></h4>
+        <p>
+          <a href="#"><i class="fa fa-fw fa-star-o"></i></a>
+          <a href="{{url_for('update_recipe', recipe_id=recipe.id)}}"><i class="fa fa-fw fa-edit"></i></a>
+          <a href="#"><i class="fa fa-fw fa-trash-o"></i></a>
+        </p>
+      </figcaption>			
+    </figure>
   </div>
-</article>
+</div>
+
+
 {% endfor %}
 {% endblock content %}
+
+
