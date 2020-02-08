@@ -4,11 +4,12 @@
 <h1>Dodaj zdjęcie do przepisu</h1>
 <br>
 
-<div class="col">
+<div class="container col">
   <form action="/recipe/new/upload_image" method="POST" enctype="multipart/form-data">
       <div class="form-group">
         <input type="file" class="custom-file-input" name="image" id="image" oninput="filesize(this);">
         <label for="image" class="custom-file-label">Wybierz plik z dysku:</label>
+        <small class="text-muted">Plik z rozszerzeniem: .jpg, .jpeg, .gif lub .png, o maksymalnej wielkości 524 kb</small>
       </div>
       <button type="submit" class="btn btn-outline-info">Zapisz zdjęcie</button>
   </form>

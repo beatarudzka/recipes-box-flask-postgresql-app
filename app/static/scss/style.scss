@@ -12,7 +12,7 @@
   height: 1.4rem; }
 
 body {
-  background: #fafafa;
+  background: #f0f0f3;
   color: #333333;
   margin-top: 5rem; }
 
@@ -39,7 +39,7 @@ h1, h2, h3, h4, h5, h6 {
   margin-bottom: 20px; }
 
 .recipe-title {
-  color: #444444; }
+  color: #333; }
 
 a.recipe-title:hover {
   color: #428bca;
@@ -258,9 +258,9 @@ a.recipe-title:hover {
   
   &__image{
     top:50%;
-    left:50%;
-    transform: translate(50%, 0%);
-    width:50%;
+    left:0%;
+    transform: translate(0%, 0%);
+    width:100%;
   
   }
   &__paragraph{

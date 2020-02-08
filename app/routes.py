@@ -1,4 +1,5 @@
 import os
+import secrets
 from PIL import Image
 from flask import render_template, url_for, flash, redirect, request, abort
 from app import app, db, bcrypt
@@ -52,6 +53,41 @@ def logout():
     logout_user()
     return redirect(url_for('home'))
 
+def create_image_set(image_dir, image_name):
+    
+    start - time.time()
+
+    thumb = 30, 30
+    small = 540, 540
+    medium = 768, 786
+    large = 750, 250
+    xl = 1200 , 1200
+
+    image = Image.open(os.path.join(image_dir, image_name))
+
+    image_extension = image_name.split(".")[-1]
+    image_name = image_name.split(".")[0]
+
+    thumbnail_image = image.copy()
+    thumbnail_image.thumbnail(thumb.Image.LANCZOS)
+    thumbnail_image.save(f"{os.path.join(image_dir, image_name)}-thumbnail.{image_extension}", optimize=True, quality=95)
+
+    small_image = image.copy()
+    small_image.small(small.Image.LANCZOS)
+    small_image.save(f"{os.path.join(image_dir, image_name)}-540.{image_extension}", optimize=True, quality=95)
+
+    medium_image = image.copy()
+    medium_image.medium(medium.Image.LANCZOS)
+    medium_image.save(f"{os.path.join(image_dir, image_name)}-768.{image_extension}", optimize=True, quality=95)
+
+    large_image = image.copy()
+    large_image.large(large.Image.LANCZOS)
+    large_image.save(f"{os.path.join(image_dir, image_name)}-1080.{image_extension}", optimize=True, quality=95)
+
+    xl_image = image.copy()
+    xl_image.xl(xl.Image.LANCZOS)
+    xl_image.save(f"{os.path.join(image_dir, image_name)}-1200.{image_extension}", optimize=True, quality=95)
+
 def allowed_image(filename):
     if not "." in filename:
         return False
@@ -68,7 +104,6 @@ def allowed_image_filesize(filesize):
         return True
     else:
         return False
-
 
 
 @app.route("/recipe/new/upload_image" , methods=['GET', 'POST'])
@@ -92,7 +127,6 @@ def upload_image():
 
                 if allowed_image(image.filename):
                     filename = secure_filename(image.filename)
-
                     image.save(os.path.join(app.config["IMAGE_UPLOADS"], filename))
 
                     flash("Plik zapisany", 'success')
@@ -145,14 +179,12 @@ def account():
 def new_recipe(): 
     form = RecipeForm()
     if form.validate_on_submit():
-        recipe = Recipe(title=form.title.data, content=form.content.data, ingredients=form.ingredients.data, image_file_recipe=form.picture.data, author=current_user)
+        recipe = Recipe(title=form.title.data, content=form.content.data, ingredients=form.ingredients.data,image_file_recipe=form.picture.data, author=current_user)
         db.session.add(recipe)
         db.session.commit()
         flash('Twój przepis został dodany!', 'success')
         return redirect(url_for('home'))
     return render_template('new_recipe.html', title='New Title', form=form, legend='Stwórz nowy przepis')
-
-
 
 
 
