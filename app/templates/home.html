@@ -1,21 +1,36 @@
 {% extends 'layout.html' %}
+
 {% block content%}
-{% for recipe in recipes %}
 
-<div class="content">
-  <div class="grid">
-    <figure class="effect-winston ">
-      <img src="{{ url_for('static', filename='images/' + 'default_recipe.jpg') }}" alt="Photo of recipe" />
-      <figcaption>
-        <h6><a href="{{ url_for('recipe', recipe_id=recipe.id)}}">{{recipe.title }}</a></h6>
-        <p>
-          <a href="{{url_for('update_recipe', recipe_id=recipe.id)}}"><i class="fa fa-fw fa-edit"></i></a>
-        </p>
-      </figcaption>
-    </figure>
-  </div>
-</div>
+  {% for recipe in recipes.items %}
+
+    <div class="content">
+      <div class="grid">
+        <figure class="effect-winston ">
+        <img src="{{ url_for('static', filename='images/' + 'default_recipe.jpg') }}" alt="Photo of recipe" />
+          <figcaption>
+          <h6><a href="{{ url_for('recipe', recipe_id=recipe.id)}}">{{recipe.title }}</a></h6>
+          <p>
+             <a href="{{url_for('update_recipe', recipe_id=recipe.id)}}"><i class="fa fa-fw fa-edit"></i></a>
+          </p>
+          </figcaption>
+      </figure>
+    </div>
+    </div>
 
 
+  {% endfor %}
+
+  {% for page_num in recipes.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=2) %}
+  {% if page_num %}
+    {% if recipes.page == page_num %}
+      <a class="btn btn-info mb-4" href="{{ url_for('home', page=page_num) }}">{{ page_num }}</a>
+    {% else %}
+      <a class="btn btn-outline-info mb-4" href="{{ url_for('home', page=page_num) }}">{{ page_num }}</a>
+    {% endif %}
+  {% else %}
+    ...
+  {% endif %}
 {% endfor %}
+
 {% endblock content %}

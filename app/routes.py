@@ -9,17 +9,13 @@ from flask_login import login_user, current_user, logout_user, login_required
 from werkzeug.utils import secure_filename
 from app.tasks import create_image_set
 
-import redis
-from rq import Queue
-
-r = redis.Redis()
-q = Queue(connection=r)
-
 
 @app.route("/")
 @app.route("/home")
 def home():
-    recipes = Recipe.query.all()
+    page = request.args.get('page', 1, type=int)
+    recipes = Recipe.query.paginate(page=page, per_page=6)
+
     return render_template('home.html', recipes=recipes)
 
 
