@@ -12,10 +12,11 @@
   <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
     crossorigin="anonymous"></script>
   <!-- <link href="https://fonts.googleapis.com/css?family=Quicksand:500" rel="stylesheet"> -->
-  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='font-awesome-4.2.0/css/font-awesome.min.css') }}" />
-    <link href='http://fonts.googleapis.com/css?family=Raleway:400,800,300' rel='stylesheet' type='text/css'>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.min.css') }}">
-    <link rel="shortcut icon" href="{{ url_for('static', filename='images/favicon.png') }}">
+  <link rel="stylesheet" type="text/css"
+    href="{{ url_for('static', filename='font-awesome-4.2.0/css/font-awesome.min.css') }}" />
+  <link href='http://fonts.googleapis.com/css?family=Raleway:400,800,300' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.min.css') }}">
+  <link rel="shortcut icon" href="{{ url_for('static', filename='images/favicon.png') }}">
   <title>OmNom</title>
 </head>
 
@@ -30,9 +31,6 @@
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarToggle">
-          <div class="navbar-nav mr-auto">
-            <li><a class="nav-item nav-link" href="{{ url_for('home')}}">Home</a></li>
-          </div>
           <div class="navbar-nav">
             {% if current_user.is_authenticated %}
             <li><a class="nav-item nav-link" href="{{ url_for('new_recipe')}}">Dodaj przepis!</a></li>
@@ -49,16 +47,16 @@
   </header>
 
   <div class="container">
-      {% with messages = get_flashed_messages(with_categories=true) %}
-      {% if messages %}
-      {% for category, message in messages%}
-      <div class="alert alert-{{ category }}">
-        {{message}}
-      </div>
-      {% endfor %}
-      {% endif %}
-      {% endwith%}
-      {% block content %}{% endblock %}
+    {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+    {% for category, message in messages%}
+    <div class="alert alert-{{ category }}">
+      {{message}}
+    </div>
+    {% endfor %}
+    {% endif %}
+    {% endwith%}
+    {% block content %}{% endblock %}
   </div>
 
 
